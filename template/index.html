@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vehicle Law ChatBot</title>
+    <script>
+        async function sendMessage() {
+            const question = document.getElementById("userInput").value;
+            const res = await fetch("/ask", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ question })
+            });
+            const data = await res.json();
+            document.getElementById("response").innerHTML = `<p><strong>답변:</strong> ${data.answer}</p>`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Vehicle Law ChatBot</h1>
+    <input type="text" id="userInput" placeholder="질문을 입력하세요" size="50"/>
+    <button onclick="sendMessage()">질문하기</button>
+    <div id="response"></div>
+</body>
+</html>
